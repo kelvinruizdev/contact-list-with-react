@@ -1,0 +1,23 @@
+.contact-card{
+    border: 1px solid grey;
+    padding: 10px 0px;
+}
+
+.contact-card > div > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /* margin: 20px; */
+}
+
+.contact-card > div > span{
+    display: block;
+    margin-right: 10px;
+    font-size: 20px;
+    color: grey;
+}
+
+.contact-card > div > p{
+    display: block;
+    font-size: 35px;
+}
