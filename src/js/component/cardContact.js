@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
+import { getState } from "../store/flux.js";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPencil, faPhone, faEnvelope, faTrashCan } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +10,7 @@ import "../../styles/card.css"
 import ModalDelete from "./modal.js";
 
 export const CardContact = ({ contact }) => {
-    const { store, actions } = useContext(Context);
+    const { store, actions, state } = useContext(Context);
 
     const [show, setShow] = useState(false);
 
@@ -37,7 +38,7 @@ export const CardContact = ({ contact }) => {
                 </div>
                 <div className="col-3">
 
-                    <Link to="/add-contact">
+                    <Link to="/add-contact" >
                         <FontAwesomeIcon
                             icon={faPencil} size="xl" style={{ color: "black", }}
                             className="m-4"
@@ -50,25 +51,6 @@ export const CardContact = ({ contact }) => {
                         onClick={handleShow}
                     />
                 </div>
-
-                {/* Modal  onClick={() => { handleDelete(contact.id) }}
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                If you delete this thing the entire universe will be destroyed!
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Oh no!</button>
-                                <button type="button" className="btn btn-primary">Yes baby!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>*/}
             </div>
 
             <ModalDelete show={show} handleClose={handleClose} id={contact.id} />

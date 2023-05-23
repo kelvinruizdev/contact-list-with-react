@@ -10,9 +10,6 @@ export function Contact() {
 
 	const { actions, store } = useContext(Context)
 	const { allContacts } = store
-	console.log(allContacts.length)
-	const { empty, setEmpty } = useState(true)
-
 
 	return (
 		<>

@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../../styles/home.css";
+import { CardContact } from "../component/cardContact";
 
 import { Context } from "../store/appContext.js";
 
 export const AddNewContact = () => {
 
 	const { actions, store } = useContext(Context)
+	const { allContacts } = store
 
 	const [contact, setContact] = useState({})
 
@@ -17,11 +19,12 @@ export const AddNewContact = () => {
 			[target.name]: target.value,
 			agenda_slug: "the_best_agenda"
 		})
-		//console.log(contact)
 	}
 
 	function handleSubmit(event) {
 		event.preventDefault()
+
+
 
 		if (contact) {
 			actions.createContact(contact);
@@ -67,7 +70,7 @@ export const AddNewContact = () => {
 				<div className="p-1">
 					<label htmlFor="exampleFormControlInput1" className="form-label">Phone</label>
 					<input
-						type="text"
+						type="tel"
 						className="form-control"
 						placeholder="Enter phone"
 						name="phone"

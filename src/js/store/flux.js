@@ -17,7 +17,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			urlBase: "https://assets.breatheco.de/apis/fake/contact/",
 			nameAgenda: "the_best_agenda",
 
-			allContacts: [] //almacena todos los contactos de una agenda
+			allContacts: [], //almacena todos los contactos de una agenda
+
+			clicFromUpdate: false //para elegir
 
 		},
 		actions: {
@@ -89,6 +91,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let response = await fetch(getStore().urlBase, {
 						method: "POST",
+						headers: {
+							"Content-type": "application/json"
+						},
+						body: JSON.stringify(contact)
+					})
+
+					if (response.ok) {
+						getActions().getAllContactFrom()
+					} else {
+						console.log("Campos vacios")
+					}
+
+				} catch (err) {
+					console.log(err)
+				}
+			},
+
+			updateContact: async (contact, id) => {
+				try {
+					let response = await fetch(getStore().urlBase + `${id}`, {
+						method: "PUT",
 						headers: {
 							"Content-type": "application/json"
 						},
