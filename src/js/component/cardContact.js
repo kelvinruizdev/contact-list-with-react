@@ -10,7 +10,7 @@ import "../../styles/card.css"
 import ModalDelete from "./modal.js";
 
 export const CardContact = ({ contact }) => {
-    const { store, actions, state } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
     const [show, setShow] = useState(false);
 
@@ -38,7 +38,7 @@ export const CardContact = ({ contact }) => {
                 </div>
                 <div className="col-3">
 
-                    <Link to="/add-contact" >
+                    <Link to="/update-contact" >
                         <FontAwesomeIcon
                             icon={faPencil} size="xl" style={{ color: "black", }}
                             className="m-4"

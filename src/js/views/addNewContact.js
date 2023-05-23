@@ -6,12 +6,14 @@ import { CardContact } from "../component/cardContact";
 
 import { Context } from "../store/appContext.js";
 
-export const AddNewContact = () => {
+export const AddNewContact = ({ update }) => {
 
 	const { actions, store } = useContext(Context)
 	const { allContacts } = store
 
 	const [contact, setContact] = useState({})
+
+
 
 	function handleChange({ target }) {
 		setContact({
@@ -23,11 +25,19 @@ export const AddNewContact = () => {
 
 	function handleSubmit(event) {
 		event.preventDefault()
-
-
+		console.log(update)
 
 		if (contact) {
-			actions.createContact(contact);
+
+			if (update) { //verifica que se va a hacer un update
+				allContacts.map((item, index) => {
+					if (item.email === contact.email) { //si coincide el email se puede actualizar
+						actions.updateContact(contact, item.id)
+					}
+				})
+			} else {
+				actions.createContact(contact);
+			}
 			setContact(
 				{
 					full_name: "",
