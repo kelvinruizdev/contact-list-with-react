@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { Context } from "../store/appContext.js";
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export function Example() {
-    const [show, setShow] = useState(false);
+function ModalDelete({ show, handleClose, id }) {
+    const { store, actions } = useContext(Context);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    function handleDelete(id) {
+        actions.deleteContact(id)
+        handleClose()
+    }
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Are you sure?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>If you delete this thing the entire universe will go down!</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
                     <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                        Oh no!
+                    </Button>
+                    <Button variant="secondary" onClick={() => { handleDelete(id) }}>
+                        Yes baby!
                     </Button>
                 </Modal.Footer>
             </Modal>
         </>
-    );
+    )
 }
 
+export default ModalDelete;

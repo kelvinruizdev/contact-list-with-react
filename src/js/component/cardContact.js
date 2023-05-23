@@ -6,18 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPencil, faPhone, faEnvelope, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 import "../../styles/card.css"
-
-import { Example } from "./modal.js";
+import ModalDelete from "./modal.js";
 
 export const CardContact = ({ contact }) => {
     const { store, actions } = useContext(Context);
 
-    function handleDelete(id) {
-        actions.deleteContact(id)
-    }
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
-        <div className="">
+        <>
             <div className="contact-card row">
                 <div className="col-3 text-center">
                     <img src={`https://unavatar.io/github/kelvinruizdev`}
@@ -37,25 +37,21 @@ export const CardContact = ({ contact }) => {
                 </div>
                 <div className="col-3">
 
-                    <FontAwesomeIcon
-                        icon={faPencil} size="xl" style={{ color: "black", }}
-                        className="m-4"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
-                    />
-
                     <Link to="/add-contact">
-
+                        <FontAwesomeIcon
+                            icon={faPencil} size="xl" style={{ color: "black", }}
+                            className="m-4"
+                        />
                     </Link>
 
                     <FontAwesomeIcon
                         icon={faTrashCan} size="xl" style={{ color: "black", }}
                         className="m-4"
-                        onClick={() => { handleDelete(contact.id) }}
+                        onClick={handleShow}
                     />
                 </div>
 
-                {/* Modal */}
+                {/* Modal  onClick={() => { handleDelete(contact.id) }}
                 <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -72,10 +68,11 @@ export const CardContact = ({ contact }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/}
             </div>
 
+            <ModalDelete show={show} handleClose={handleClose} id={contact.id} />
 
-        </div>
+        </>
     );
 };
