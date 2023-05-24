@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			allContacts: [], //almacena todos los contactos de una agenda
 
-			clicFromUpdate: false //para elegir
+			id: "" //para elegir
 
 		},
 		actions: {

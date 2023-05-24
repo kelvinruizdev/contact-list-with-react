@@ -31,7 +31,8 @@ export const AddNewContact = ({ update }) => {
 
 			if (update) { //verifica que se va a hacer un update
 				allContacts.map((item, index) => {
-					if (item.email === contact.email) { //si coincide el email se puede actualizar
+					//console.log(item.id)
+					if (update) {
 						actions.updateContact(contact, item.id)
 					}
 				})
@@ -51,7 +52,14 @@ export const AddNewContact = ({ update }) => {
 
 	return (
 		<div className="container p-5">
-			<h1 className="text-center">Add a new contact</h1>
+
+			{
+				update ?
+					<h1 className="text-center">Update a contact</h1>
+					:
+					<h1 className="text-center">Add a new contact</h1>
+			}
+
 
 			<form onSubmit={handleSubmit}>
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
-import { getState } from "../store/flux.js";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faPencil, faPhone, faEnvelope, faTrashCan } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +8,7 @@ import { faLocationDot, faPencil, faPhone, faEnvelope, faTrashCan } from '@forta
 import "../../styles/card.css"
 import ModalDelete from "./modal.js";
 
-export const CardContact = ({ contact }) => {
+export const CardContact = ({ key, contact }) => {
     const { store, actions } = useContext(Context);
 
     const [show, setShow] = useState(false);
