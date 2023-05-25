@@ -28,7 +28,7 @@ export function Contact() {
 
 					return (
 						<>
-							<CardContact key={index} contact={item}></CardContact>
+							<CardContact key={index} contact={item} />
 						</>
 					)
 

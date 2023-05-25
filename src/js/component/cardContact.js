@@ -37,7 +37,7 @@ export const CardContact = ({ key, contact }) => {
                 </div>
                 <div className="col-3">
 
-                    <Link to="/update-contact" >
+                    <Link to={`/add-contact/${contact.id}`} >
                         <FontAwesomeIcon
                             icon={faPencil} size="xl" style={{ color: "black", }}
                             className="m-4"

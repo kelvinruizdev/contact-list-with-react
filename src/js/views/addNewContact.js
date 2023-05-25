@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import "../../styles/home.css";
 import { CardContact } from "../component/cardContact";
@@ -13,7 +13,18 @@ export const AddNewContact = ({ update }) => {
 
 	const [contact, setContact] = useState({})
 
+	const params = useParams()
 
+	console.log(params)
+
+	function findContact() {
+		let exists = store.allContacts.find((item) => item.id == params.contactId)
+		if (exists) {
+			setContact(
+				exists
+			)
+		}
+	}
 
 	function handleChange({ target }) {
 		setContact({
@@ -49,6 +60,13 @@ export const AddNewContact = ({ update }) => {
 			)
 		}
 	}
+
+	useEffect(() => {
+		if (params.contactId) {
+			findContact()
+			console.log(params.contactId)
+		}
+	}, [])
 
 	return (
 		<div className="container p-5">

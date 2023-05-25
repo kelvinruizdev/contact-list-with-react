@@ -67,6 +67,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
+
+
 			deleteContact: async (id) => {
 
 				try {
@@ -88,23 +90,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createContact: async (contact) => {
 
-				try {
-					let response = await fetch(getStore().urlBase, {
-						method: "POST",
-						headers: {
-							"Content-type": "application/json"
-						},
-						body: JSON.stringify(contact)
-					})
+				const store = getStore()
+				let exists = store.allContacts.find((item) => item.email == contact.email)
+				console.log(exists)
 
-					if (response.ok) {
-						getActions().getAllContactFrom()
-					} else {
-						console.log("Campos vacios")
+				if (exists) {
+					getActions().updateContact(contact, exists.id)
+				} else {
+					try {
+						let response = await fetch(getStore().urlBase, {
+							method: "POST",
+							headers: {
+								"Content-type": "application/json"
+							},
+							body: JSON.stringify(contact)
+						})
+
+						if (response.ok) {
+							getActions().getAllContactFrom()
+						} else {
+							console.log("Campos vacios")
+						}
+
+					} catch (err) {
+						console.log(err)
 					}
-
-				} catch (err) {
-					console.log(err)
 				}
 			},
 
