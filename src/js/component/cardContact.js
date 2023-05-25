@@ -47,7 +47,7 @@ export const CardContact = ({ key, contact }) => {
                     <FontAwesomeIcon
                         icon={faTrashCan} size="xl" style={{ color: "black", }}
                         className="m-4"
-                        onClick={handleShow}
+                        onClick={() => handleShow()}
                     />
                 </div>
             </div>

@@ -15,7 +15,6 @@ export const AddNewContact = ({ update }) => {
 
 	const params = useParams()
 
-	console.log(params)
 
 	function findContact() {
 		let exists = store.allContacts.find((item) => item.id == params.contactId)
@@ -36,35 +35,35 @@ export const AddNewContact = ({ update }) => {
 
 	function handleSubmit(event) {
 		event.preventDefault()
-		console.log(update)
+		actions.createContact(contact);
+		// console.log(update)
 
-		if (contact) {
+		// if (contact) {
 
-			if (update) { //verifica que se va a hacer un update
-				allContacts.map((item, index) => {
-					//console.log(item.id)
-					if (update) {
-						actions.updateContact(contact, item.id)
-					}
-				})
-			} else {
-				actions.createContact(contact);
-			}
-			setContact(
-				{
-					full_name: "",
-					email: "",
-					address: "",
-					phone: ""
-				}
-			)
-		}
+		// 	if (update) { //verifica que se va a hacer un update
+		// 		allContacts.map((item, index) => {
+		// 			//console.log(item.id)
+		// 			if (update) {
+		// 				actions.updateContact(contact, item.id)
+		// 			}
+		// 		})
+		// 	} else {
+		// 		actions.createContact(contact);
+		// 	}
+		// 	setContact(
+		// 		{
+		// 			full_name: "",
+		// 			email: "",
+		// 			address: "",
+		// 			phone: ""
+		// 		}
+		// 	)
+		// }
 	}
 
 	useEffect(() => {
 		if (params.contactId) {
 			findContact()
-			console.log(params.contactId)
 		}
 	}, [])
 
